@@ -1,0 +1,100 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+body{
+    background-color: #101010;
+}
+.bg-y{
+    background-color: #d7ff00;
+}
+.bg-b{
+    background-color: #547fdd;
+}
+.bg-n{
+    background-color: #232323;
+}
+.bg-ny{
+    background: linear-gradient(90deg, rgba(42,44,33,1) 0%, rgba(35,35,35,1) 50%, rgba(47,49,35,1) 100%);
+}
+.bg-nyn{
+    background: linear-gradient(90deg, rgba(35,35,35,1) 0%, rgba(47,49,35,1) 50%, rgba(35,35,35,1) 100%);
+}
+.bg-by{
+    background: linear-gradient(45deg, rgba(121,150,146,1) 0%, rgba(98,140,187,1) 50%, rgba(84,122,223,1) 100%);
+}
+.bg-nny{
+    background: linear-gradient(135deg, rgba(35,35,35,1) 0%, rgba(38,38,36,1) 50%, rgba(46,48,37,1) 100%);
+}
+.navbar{
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(6, 1fr);
+    margin-bottom: 1rem;
+}
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+.navbar a:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+.m-one{
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+.m-two{
+    grid-column-start: 5;
+    grid-column-end: 6;
+}
+.m-three{
+    grid-column-start: 6;
+    grid-column-end: 7;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 5px;
+}
+.dashboard div {
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.c-1 {
+    grid-column: span 1;
+}
+.c-2 {
+    grid-column: span 2;
+}
+.c-3 {
+    grid-column: span 3;
+}
+.c-4 {
+    grid-column: span 4;
+}
+.r-1 {
+    grid-row: span 1;
+}
+.r-2 {
+    grid-row: span 2;
+}
+.r-3 {
+    grid-row: span 3;
+}
+.r-4 {
+    grid-row: span 4;
+}
+.ejm{
+    margin-top: 2rem;
+    color: #ffffff;
+    font-size: 2.5rem;
+}
+.ejm ul{
+    list-style-type: none;
+    padding: 0;
+}
