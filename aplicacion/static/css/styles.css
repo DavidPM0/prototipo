@@ -33,8 +33,11 @@ body{
     color: #fff;
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 40px;
     text-align: center;
+    border: 2px solid #ffffff;
+    margin-left: 20px;
+    font-weight: 500;
 }
 .navbar a:hover {
     background-color: #ffffff;
@@ -55,12 +58,12 @@ body{
 .dashboard {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: repeat(11, 1fr);
     gap: 5px;
 }
-.dashboard div {
+.dashboard .col {
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px 7.5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,4 +100,292 @@ body{
 .ejm ul{
     list-style-type: none;
     padding: 0;
+}
+.container{
+    height: 100vh;
+}
+.wrapper{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bar-seconds, .number-hours{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.bar-seconds span{
+    position: absolute;
+    transform: rotate(calc(var(--index) * 6deg));
+    inset: -5px;
+    text-align: center;
+}
+.bar-seconds span p{
+    display: inline-block;
+    width: 2px;
+    height: 5px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 0 10px #ffffff;
+}
+.bar-seconds span:nth-child(5n) p{
+    width: 3px;
+    height: 10px;
+    transform: translateY(.5px);
+}
+.number-hours span{
+    position: absolute;
+    transform: rotate(calc(var(--index) * 30deg));
+    inset:6px;
+    text-align: center;
+}
+.number-hours span p{
+    font-size: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff;
+    transform: rotate(calc(var(--index) * -30deg));
+}
+.hands-box{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hands-box .hand{
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hands-box .hand i{
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(0deg);
+    display: inline-block;
+    transform-origin: bottom center;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ffffff;
+}
+.hands-box .hours{
+    width: 120px;
+    height: 120px;
+}
+.hands-box .hours i{
+    width: 3px;
+    height: 60px;
+    background: #ffffff;
+}
+.hands-box .minutes{
+    width: 150px;
+    height: 150px;
+}
+.hands-box .minutes::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ffffff;
+}
+.hands-box .minutes i{
+    width: 3px;
+    height: 75px;
+    background: #ffffff;
+}
+.hands-box .seconds{
+    width: 180px;
+    height: 180px;
+}
+.hands-box .seconds::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #d7ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+}
+.hands-box .seconds i{
+    width: 2px;
+    height: 90px;
+    background: #d7ff00;
+    box-shadow: none;
+}
+
+.carousel{
+    height: 100vh;
+    padding: 0 10%;
+    overflow: hidden;
+}
+.carousel .box-info{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 650px;
+    height: 250px;
+    overflow: hidden;
+}
+.box-info .list-info{
+    transition: 1s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.list-info .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #ffffff;
+    height: 250px;
+}
+.info h2{
+    font-size: 50px;
+    line-height: 1;
+}
+.info p{
+    font-size: 16px;
+    margin: 20px 0;
+}
+.carousel .list-img{
+    height: 100%;
+    transition: 1s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.list-img .item{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.item img{
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,.1));
+}
+.navigation{
+    position: absolute;
+    bottom: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.navigation span{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 55px;
+    color: #ffffff;
+}
+.bg-box .bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: 1s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.bg-box .bg:nth-child(1){
+    background: linear-gradient(360deg, #408e20, #9acd31);
+}
+.bg-box .bg:nth-child(2){
+    background: linear-gradient(360deg, #550802, #f40401);
+}
+.bg-box .bg:nth-child(3){
+    background: linear-gradient(360deg, #696901, #ffff03);
+}
+.bg-box .bg:nth-child(4){
+    background: linear-gradient(360deg, #823043, #fac0cb);
+}
+.bg-box .bg:nth-child(2),.bg-box .bg:nth-child(3),.bg-box .bg:nth-child(4){
+    clip-path: circle(0% at 50% 50%);
+}
+.bg-box .bg:nth-child(2).active,.bg-box .bg:nth-child(3).active,.bg-box .bg:nth-child(4).active{
+    clip-path: circle(75% at 50% 50%);
+}
+
+.clima{
+    display: inline-block!important;
+}
+#forecast{
+    display: flex;
+}
+.box-app{
+    position: relative;
+    width: 160px;
+    height: 200px;
+    background: rgba(255, 255, 255, .1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, .1);
+    border-radius: 10px;
+    padding: 10px;
+    color: #ffffff;
+    margin: 0 7.5px;
+}
+.weather-box{
+    text-align: center;
+    margin: 10px 0;
+}
+.weather-box img{
+    width: 60%;
+}
+.weather-box .temperature{
+    position: relative;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+}
+.weather-box .temperature span{
+    font-size: 18px;
+    margin-left: 4px;
+}
+.weather-box .description{
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.weather-details{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+}
+.weather-details .humidity,.weather-details .wind{
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+.weather-details .humidity{
+    justify-content: flex-start;
+}
+.weather-details .wind{
+    justify-content: flex-end;
+}
+.weather-details i{
+    font-size: 15px;
+    margin-right: 5px;
+}
+.weather-details span{
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+}
+.chart-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    margin: auto;
 }
