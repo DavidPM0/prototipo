@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activar Bot</title>
+    <script>
+        function activateBot(command) {
+            fetch("{% url 'run_bot' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: new URLSearchParams({
+                    'command': command
+                })
+            }).then(response => response.json()).then(data => {
+                console.log(data.status);
+                alert("Bot response: " + data.response);
+            }).catch(error => {
+                console.error('Error:', error);
+                alert("Error activating bot");
+            });
+        }
+
+        function startRecognition() {
+            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'es-ES';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                var command = event.results[0][0].transcript;
+                console.log('Command received: ' + command);
+                activateBot(command);
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Error occurred in recognition: ' + event.error);
+                alert('Error occurred in recognition: ' + event.error);
+            };
+        }
+    </script>
+</head>
+<body>
+    <h1>Presiona el botón y habla para activar el bot</h1>
+    <button onclick="startRecognition()">Hablar</button>
+</body>
+</html>

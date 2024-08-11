@@ -183,13 +183,13 @@ const incomeExpenseApiUrl = 'https://mocki.io/v1/0c4a17f1-30d1-4a00-845f-94af12f
         // Fetch data for electricity consumption
         fetch(electricityApiUrl)
             .then(response => response.json())
-            .then(data => createHorizontalBarChart(data, 'electricityChart', 'Consumo (kWh)', 'rgba(255, 159, 64, 0.2)', 'rgba(255, 159, 64, 1)'))
+            .then(data => createHorizontalBarChart(data, 'electricityChart', 'Consumo (kWh)', 'rgba(35, 35, 35, 0.2)', 'rgba(35, 35, 35, 1)'))
             .catch(error => console.error('Error al obtener los datos de electricidad:', error));
 
         // Fetch data for water consumption
         fetch(waterApiUrl)
             .then(response => response.json())
-            .then(data => createChart(data, 'waterChart', 'Consumo (m³)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)'))
+            .then(data => createChart(data, 'waterChart', 'Consumo (m³)', 'rgba(84, 127, 221, 0.2)', 'rgba(84, 127, 221, 1)'))
             .catch(error => console.error('Error al obtener los datos de agua:', error));
 
         // Function to create chart
@@ -304,10 +304,10 @@ const incomeExpenseApiUrl = 'https://mocki.io/v1/0c4a17f1-30d1-4a00-845f-94af12f
                             title: {
                                 display: true,
                                 text: label,
-                                color: 'white'
+                                color: '#232323'
                             },
                             ticks: {
-                                color: 'white'
+                                color: '#232323'
                             }
                         },
                         y: {
@@ -315,17 +315,17 @@ const incomeExpenseApiUrl = 'https://mocki.io/v1/0c4a17f1-30d1-4a00-845f-94af12f
                             title: {
                                 display: true,
                                 text: 'Mes',
-                                color: 'white'
+                                color: '#232323'
                             },
                             ticks: {
-                                color: 'white'
+                                color: '#232323'
                             }
                         }
                     },
                     plugins: {
                         legend: {
                             labels: {
-                                color: 'white'
+                                color: '#232323'
                             }
                         }
                     }
@@ -363,16 +363,16 @@ const incomeExpenseApiUrl = 'https://mocki.io/v1/0c4a17f1-30d1-4a00-845f-94af12f
                         {
                             label: 'Ingresos',
                             data: incomeValues,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(84, 127, 221, 1)',
+                            backgroundColor: 'rgba(84, 127, 221, 0.2)',
                             fill: false,
                             tension: 0.1
                         },
                         {
                             label: 'Gastos',
                             data: expenseValues,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(215, 255, 0, 1)',
+                            backgroundColor: 'rgba(215, 255, 0, 0.2)',
                             fill: false,
                             tension: 0.1
                         }
@@ -471,9 +471,9 @@ const incomeExpenseApiUrl = 'https://mocki.io/v1/0c4a17f1-30d1-4a00-845f-94af12f
                         datasets: [{
                             label: 'Indicadores Ambientales',
                             data: dataValues,
-                            backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                            borderColor: 'rgba(0, 123, 255, 1)',
-                            pointBackgroundColor: 'rgba(0, 123, 255, 1)',
+                            backgroundColor: 'rgba(84, 127, 221, 0.5)',
+                            borderColor: 'rgba(84, 127, 221, 1)',
+                            pointBackgroundColor: 'rgba(84, 127, 221, 1)',
                             borderWidth: 2,
                             pointRadius: 3
                         }]
@@ -514,3 +514,115 @@ const incomeExpenseApiUrl = 'https://mocki.io/v1/0c4a17f1-30d1-4a00-845f-94af12f
                 });
             })
             .catch(error => console.error('Error al obtener los datos ambientales:', error));
+
+/* Script Calendario empieza */
+
+document.addEventListener("DOMContentLoaded", function() {
+    let calendar = document.querySelector('.calendar');
+    const month_names = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    const isLeapYear = (year) => {
+        return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
+    };
+
+    const getFebDays = (year) => {
+        return isLeapYear(year) ? 29 : 28;
+    };
+
+    const generateCalendar = (month, year) => {
+        let calendar_days = calendar.querySelector('.calendar-days');
+        let calendar_header_year = calendar.querySelector('#year');
+
+        let days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        calendar_days.innerHTML = '';
+
+        let currDate = new Date();
+        if (!month) month = currDate.getMonth();
+        if (!year) year = currDate.getFullYear();
+
+        let curr_month = `${month_names[month]}`;
+        month_picker.innerHTML = curr_month;
+        calendar_header_year.innerHTML = year;
+
+        let first_day = new Date(year, month, 1);
+
+        for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
+            let day = document.createElement('div');
+            if (i >= first_day.getDay()) {
+                day.classList.add('calendar-day-hover');
+                day.innerHTML = i - first_day.getDay() + 1;
+                day.innerHTML += `<span></span><span></span><span></span><span></span>`;
+                if (i - first_day.getDay() + 1 === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
+                    day.classList.add('curr-date');
+                }
+            }
+            calendar_days.appendChild(day);
+        }
+    };
+
+    let month_list = calendar.querySelector('.month-list');
+
+    month_names.forEach((e, index) => {
+        let month = document.createElement('div');
+        month.innerHTML = `<div data-month="${index}">${e}</div>`;
+        month.querySelector('div').onclick = () => {
+            month_list.classList.remove('show');
+            curr_month.value = index;
+            generateCalendar(index, curr_year.value);
+        };
+        month_list.appendChild(month);
+    });
+
+    let month_picker = calendar.querySelector('#month-picker');
+
+    month_picker.onclick = () => {
+        month_list.classList.toggle('show');
+    };
+
+    let currDate = new Date();
+    let curr_month = {value: currDate.getMonth()};
+    let curr_year = {value: currDate.getFullYear()};
+
+    generateCalendar(curr_month.value, curr_year.value);
+
+    document.querySelector('#prev-year').onclick = () => {
+        --curr_year.value;
+        generateCalendar(curr_month.value, curr_year.value);
+    };
+
+    document.querySelector('#next-year').onclick = () => {
+        ++curr_year.value;
+        generateCalendar(curr_month.value, curr_year.value);
+    };
+});
+
+// NOTAS
+
+const notaTexto = document.getElementById('nota-texto');
+const editarBoton = document.getElementById('editar-nota');
+const eliminarBoton = document.getElementById('eliminar-nota');
+
+// Estado inicial
+let editando = false;
+
+editarBoton.addEventListener('click', () => {
+    if (!editando) {
+        notaTexto.disabled = true;
+        notaTexto.focus();
+        editarBoton.textContent = 'Editar Nota';
+        editando = true;
+    } else {
+        notaTexto.disabled = false;
+        editarBoton.textContent = 'Guardar Nota';
+        editando = false;
+    }
+});
+
+eliminarBoton.addEventListener('click', () => {
+    notaTexto.value = '';
+    notaTexto.placeholder = 'Escribe tu nota aquí...';
+    notaTexto.disabled = false;
+    editarBoton.textContent = 'Guardar Nota';
+    editando = false;
+});

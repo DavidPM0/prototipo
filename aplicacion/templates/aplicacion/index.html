@@ -69,56 +69,74 @@
         </span>
     </div>
 
-    <div class="container p-5">
-        <div class="navbar">
-            <a href="#m-one" class="m-one">Empresa 1</a>
-            <a href="#m-two" class="m-two">Empresa 2</a>
-            <a href="#m-three" class="m-three">Empresa 3</a>
-        </div>
-        <div class="dashboard">
-            <div class="col bg-by c-2 r-3">
-                <div class="wrapper">
-                    <div class="bar-seconds"></div>
-                    <div class="number-hours"></div>
-                    <div class="hands-box">
-                        <div class="hand hours"><i></i></div>
-                        <div class="hand minutes"><i></i></div>
-                        <div class="hand seconds"><i></i></div>
+    <div class="smart">
+        <div class="container">
+            <div class="dashboard">
+                <div class="col bg-by c-2 r-2">
+                    <div class="wrapper">
+                        <div class="bar-seconds"></div>
+                        <div class="number-hours"></div>
+                        <div class="hands-box">
+                            <div class="hand hours"><i></i></div>
+                            <div class="hand minutes"><i></i></div>
+                            <div class="hand seconds"><i></i></div>
+                        </div>
                     </div>
                 </div>
+                <div class="col bg-nny c-4 r-2">
+                    <canvas id="incomeExpenseChart"></canvas>
+                </div>
+                <div class="col bg-ny c-3 r-2">
+                    <canvas id="waterChart"></canvas>
+                </div>
+                <div class="col bg-y c-3 r-2">
+                    <canvas id="electricityChart"></canvas>
+                </div>
+                <div class="col bg-n c-4 r-1 clima">
+                    <div id="forecast"></div>
+                </div>
+                <div class="col bg-nyn c-2 r-1 box-nota">
+                    <div class="nota-rapida-container">
+                        <h3 class="nota-rapida-titulo">Nota Rápida</h3>
+                        <textarea id="nota-texto" class="nota-rapida-texto" placeholder="Escribe tu nota aquí..."></textarea>
+                        <div class="nota-rapida-botones">
+                            <button id="editar-nota" class="nota-rapida-boton nota-rapida-boton-editar">Guardar Nota</button>
+                            <button id="eliminar-nota" class="nota-rapida-boton nota-rapida-boton-eliminar">Eliminar Nota</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col bg-n c-2 r-2 body-calendar">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <span class="month-picker" id="month-picker">February</span>
+                            <div class="year-picker">
+                                <span class="year-change" id="prev-year"><</span>
+                                <span id="year">2021</span>
+                                <span class="year-change" id="next-year">></span>
+                            </div>
+                        </div>
+                        <div class="calendar-body">
+                            <div class="calendar-week-day">
+                                <div>Dom</div>
+                                <div>Lun</div>
+                                <div>Mar</div>
+                                <div>Mie</div>
+                                <div>Jue</div>
+                                <div>Vie</div>
+                                <div>Sab</div>
+                            </div>
+                            <div class="calendar-days"></div>
+                        </div>
+                        <div class="month-list"></div>
+                    </div>
+                </div>
+                <div class="col bg-n c-2 r-2">
+                    <canvas id="environmentalRadarChart"></canvas>
+                </div>
+                <div class="col bg-b c-2 r-2 bot-container">
+                    <button class="bot" onclick=""></button>
+                </div>
             </div>
-            <div class="col bg-nny c-4 r-3">
-                <canvas id="incomeExpenseChart"></canvas>
-            </div>
-            <div class="col bg-ny c-3 r-3">
-                <canvas id="waterChart"></canvas>
-            </div>
-            <div class="col bg-y c-3 r-3">
-                <canvas id="electricityChart"></canvas>
-            </div>
-            <div class="col bg-n c-4 r-2 clima">
-                <div id="forecast"></div>
-            </div>
-            <div class="col bg-nyn c-2 r-2">
-                6
-            </div>
-            <div class="col bg-n c-2 r-3">
-                7
-            </div>
-            <div class="col bg-n c-2 r-3">
-                <canvas id="environmentalRadarChart"></canvas>
-            </div>
-            <div class="col bg-b c-2 r-3">
-                9
-            </div>
-        </div>
-        <div class="ejm">
-            <ul>
-                <li>1. ejemplo 1</li>
-                <li>2. ejemplo 2</li>
-                <li>3. ejemplo 3</li>
-                <li>4. ejemplo 4</li>
-            </ul>         
         </div>
     </div>
 
