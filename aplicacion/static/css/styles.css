@@ -58,6 +58,7 @@ body{
 .smart{
     background-image: url(../img/smartwatch.png);
     background-size: cover;
+    margin: 100px 0;
 }
 .dashboard {
     display: grid;
@@ -233,7 +234,6 @@ body{
     height: 100vh;
     padding: 0 10%;
     overflow: hidden;
-    display: none;
 }
 .carousel .box-info{
     position: absolute;
@@ -299,23 +299,22 @@ body{
     color: #ffffff;
 }
 .bg-box .bg{
-    display: none;
     position: absolute;
     width: 100%;
     height: 100%;
     transition: 1s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
 .bg-box .bg:nth-child(1){
-    background: linear-gradient(360deg, #408e20, #9acd31);
+    background: linear-gradient(360deg, #101010, rgba(47,49,35,1));
 }
 .bg-box .bg:nth-child(2){
-    background: linear-gradient(360deg, #550802, #f40401);
+    background: linear-gradient(360deg, rgba(84,122,223,1), rgba(121,150,146,1));
 }
 .bg-box .bg:nth-child(3){
-    background: linear-gradient(360deg, #696901, #ffff03);
+    background: linear-gradient(360deg, #101010, rgba(47,49,35,1));
 }
 .bg-box .bg:nth-child(4){
-    background: linear-gradient(360deg, #823043, #fac0cb);
+    background: linear-gradient(360deg, rgba(84,122,223,1), rgba(121,150,146,1));
 }
 .bg-box .bg:nth-child(2),.bg-box .bg:nth-child(3),.bg-box .bg:nth-child(4){
     clip-path: circle(0% at 50% 50%);
@@ -568,10 +567,6 @@ body{
     background-color: var(--blue);
     color: var(--white);
     border-radius: 50%;
-}
-
-.calendar-days div.curr-date span {
-    display: none;
 }
 
 .month-picker {
