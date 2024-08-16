@@ -5,10 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {% load static %}
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function activateBot(command) {
+            fetch("{% url 'home' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: new URLSearchParams({
+                    'command': command
+                })
+            }).then(response => response.json()).then(data => {
+                console.log(data.status);
+                if (!window.speechSynthesis.speaking) { // Verifica si no está hablando ya
+                    var audio = new SpeechSynthesisUtterance(data.response);
+                    window.speechSynthesis.speak(audio);
+                    alert("Bot response: " + data.response);
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert("Error activating bot");
+            });
+        }
+        
+        function startRecognition() {
+            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'es-ES';
+            recognition.interimResults = false; // Asegúrate de que los resultados intermedios estén deshabilitados
+            recognition.maxAlternatives = 1;
+        
+            recognition.onresult = function(event) {
+                var command = event.results[0][0].transcript;
+                console.log('Command received: ' + command);
+                // Evitar múltiples llamadas en un solo resultado
+                if (event.results[0].isFinal) {
+                    activateBot(command);
+                }
+            };
+        
+            recognition.onerror = function(event) {
+                console.error('Error occurred in recognition: ' + event.error);
+                alert('Error occurred in recognition: ' + event.error);
+            };
+        
+            recognition.onend = function() {
+                console.log('Speech recognition service disconnected');
+            };
+        
+            recognition.start();
+        }
+    </script>
 </head>
 <body>
     <div class="bg-box">
@@ -21,41 +72,41 @@
     <div class="carousel">
         <div class="list-img">
             <div class="item">
-                <img src="">
+                <img src="{% static 'img/slider1.png' %}" alt="nosotros">
             </div>
 
             <div class="item">
-                <img src="">
+                <img src="{% static 'img/slider2.png' %}" alt="nosotros">
             </div>
 
             <div class="item">
-                <img src="">
+                <img src="{% static 'img/slider3.png' %}" alt="nosotros">
             </div>
 
             <div class="item">
-                <img src="">
+                <img src="{% static 'img/slider4.png' %}" alt="nosotros">
             </div>
         </div>
         <div class="box-info">
             <div class="list-info">
                 <div class="info">
-                    <h2>1</h2>
-                    <p>lorem</p>
+                    <h2>Dashboard Integral de Sostenibilidad Empresarial</h2>
+                    <p>Bienvenido a nuestro dashboard de sostenibilidad empresarial. Esta pantalla unificada te brinda acceso instantáneo a toda la información clave que necesitas para monitorear tanto el rendimiento financiero como los indicadores ambientales de tu empresa. Todo en un solo lugar para que puedas tomar decisiones informadas rápidamente.</p>
                 </div>
 
                 <div class="info">
-                    <h2>2</h2>
-                    <p>lorem</p>
+                    <h2>Monitoreo de Finanzas y Uso de Recursos</h2>
+                    <p>En la parte superior, encontrarás herramientas esenciales para la gestión de tus operaciones, incluyendo un reloj en tiempo real y gráficos que te permiten seguir de cerca los ingresos, gastos, y el consumo de agua por metro cúbico. Estos indicadores te proporcionan una visión clara y detallada de cómo se están utilizando los recursos de tu empresa.</p>
                 </div>
 
                 <div class="info">
-                    <h2>3</h2>
-                    <p>lorem</p>
+                    <h2>Indicadores Ambientales y Condiciones Climáticas</h2>
+                    <p>Justo debajo, te presentamos un resumen de las condiciones climáticas actuales, esenciales para planificar tus actividades diarias. A la derecha, un radar de indicadores ambientales te ofrece una visión completa sobre tu huella de carbono, la inversión en sostenibilidad, y la gestión de residuos, permitiéndote ver cómo tus decisiones impactan el medio ambiente.</p>
                 </div>
 
                 <div class="info">
-                    <h2>4</h2>
-                    <p>lorem</p>
+                    <h2>Asistencia Inteligente y Notas Rápidas</h2>
+                    <p>Para facilitar tu experiencia, hemos incorporado una sección de notas rápidas donde puedes registrar tus observaciones o ideas en cualquier momento. Además, contamos con un bot inteligente que puede resumir toda la información presentada en la pantalla, ahorrándote tiempo y asegurando que no te pierdas de los detalles más importantes.</p>
                 </div>
             </div>
         </div>
@@ -134,7 +185,7 @@
                     <canvas id="environmentalRadarChart"></canvas>
                 </div>
                 <div class="col bg-b c-2 r-2 bot-container">
-                    <button class="bot" onclick=""></button>
+                    <button class="bot" onclick="startRecognition()"></button>
                 </div>
             </div>
         </div>
